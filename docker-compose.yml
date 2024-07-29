@@ -1,0 +1,20 @@
+version: '3.8'
+name: [name_me] # Name of docker higher level container/bridge
+services:
+  [servername]: # Name of specific docker container
+    image: itzg/minecraft-server:java21
+    restart: unless-stopped
+    volumes:
+    - ./data:/data
+    - ./modpacks:/modpacks:ro
+    environment:
+      EULA: "true"
+      TYPE: CURSEFORGE
+      VERSION: [VERSION] # Needs to match minecraft version (ex: 1.7.10)
+      OVERRIDE_SERVER_PROPERTIES: true
+      CF_SERVER_MOD: /modpacks/modpack.zip
+      CF_BASE_DIR: /data
+      MEMORY: 4G # Memory assignment
+      SERVER: [FORGE_NAME].jar # needs to be changed to match expected java launch jar
+    ports:
+      - "25565:25565" # map internal port 25565 to external port 25565

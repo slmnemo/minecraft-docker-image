@@ -1,0 +1,38 @@
+#!/bin/bash
+
+SERVER_NAME=default
+INSTANCE_NAME=default
+
+case $1 in
+	"install")
+		./get_modpack.sh
+		echo installed modpack files
+		;;
+	
+	"start")	
+		./docker_start.sh
+		echo started server successfully!
+		;;
+
+	"restart")
+		docker exec -i $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 5 minutes!'"
+		sleep 5m
+		docker exec $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli stop
+		echo "Restarted server!"
+		;;
+
+	"stop")
+		docker exec -i $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server shutting down in 5 minutes!'"
+		sleep 5m
+		docker kill $SERVER_NAME-$INSTANCE_NAME-1
+		echo "Stopped docker server"
+		;;
+	# TODO: Add exec option
+	"exec")
+		docker exec -i $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli $2
+		echo "Executed command $1 in container $SERVER_NAME-$INSTANCE_NAME-1 successfully!"
+	*)
+		echo "Invalid parameter specified"
+		;;
+esac
+
