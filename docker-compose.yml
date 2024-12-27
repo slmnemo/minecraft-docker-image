@@ -1,20 +1,18 @@
 version: '3.8'
-name: [name_me] # Name of docker higher level container/bridge
+name: o_creat # Name of docker higher level container/bridge
 services:
-  [servername]: # Name of specific docker container
-    image: itzg/minecraft-server:java21
+  mfmk: # Name of specific docker container
+    image: itzg/minecraft-server:java17
     restart: unless-stopped
     volumes:
     - ./data:/data
     - ./modpacks:/modpacks:ro
     environment:
       EULA: "true"
-      TYPE: CURSEFORGE
-      VERSION: [VERSION] # Needs to match minecraft version (ex: 1.7.10)
+      TYPE: MODRINTH
+      VERSION: 1.20.1 # Needs to match minecraft version (ex: 1.7.10)
       OVERRIDE_SERVER_PROPERTIES: true
-      CF_SERVER_MOD: /modpacks/modpack.zip
-      CF_BASE_DIR: /data
       MEMORY: 4G # Memory assignment
-      SERVER: [FORGE_NAME].jar # needs to be changed to match expected java launch jar
+      MODRINTH_MODPACK: /modpacks/modpack.mrpack
     ports:
-      - "25565:25565" # map internal port 25565 to external port 25565
+      - "25560:25565" # map internal port 25565 to external port 25565
