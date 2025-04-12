@@ -5,19 +5,6 @@
 # Export variables from definitions file
 source definitions
 
-MODPACK_FOLDER=modpacks
-
-# Download modrinth file to modrinth.mrpack for quick deployment
-if [ "${TYPE}" = "MODRINTH" ]; then 
-  OUTPUT_FILE="${MODPACK_FOLDER}/modrinth.mrpack"
-elif [ "${TYPE}" = "CURSEFORGE" ]; then
-  OUTPUT_FILE="${MODPACK_FOLDER}/modpack.zip"
-fi
-
-# Create correct define for docker container path
-DOCKER_MODPACK_LOCATION="/${OUTPUT_FILE}"
-export DOCKER_MODPACK_LOCATION
-
 # Download modpack using curl
 if [ ! -f "${OUTPUT_FILE}" ]; then
   echo Downloading "${MODPACK_DOWNLOAD_LINK}"

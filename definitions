@@ -10,6 +10,18 @@ MEMORY_ALLOC="8G"
 SERVER_PORT="25565"
 MODPACK_DOWNLOAD_LINK="https://cdn.modrinth.com/data/EGs3lC8D/versions/fqg3aUjP/Prominence%20II%20Hasturian%20Era%203.1.7.mrpack"
 
+
+# Define modpack info
+MODPACK_FOLDER=modpacks
+# Set output file for curl based on type
+if [ "${TYPE}" = "MODRINTH" ]; then 
+  OUTPUT_FILE="${MODPACK_FOLDER}/modrinth.mrpack"
+elif [ "${TYPE}" = "CURSEFORGE" ]; then
+  OUTPUT_FILE="${MODPACK_FOLDER}/modpack.zip"
+fi
+# Create correct define for docker container path
+DOCKER_MODPACK_LOCATION="/${OUTPUT_FILE}"
+
 # Export variables for docker container
 export NAME
 export VERSION
@@ -17,3 +29,4 @@ export TYPE
 export MEMORY_ALLOC
 export MODPACK_DOWNLOAD_LINK
 export SERVER_PORT
+export DOCKER_MODPACK_LOCATION
