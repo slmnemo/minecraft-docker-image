@@ -1,7 +1,7 @@
 version: '3.8'
-name: o_creat # Name of docker higher level container/bridge
+name: ${NAME} # Name of docker higher level container/bridge
 services:
-  mfmk: # Name of specific docker container
+  mc-server: # Name of specific docker container
     image: itzg/minecraft-server:java17
     restart: unless-stopped
     volumes:
@@ -9,10 +9,13 @@ services:
     - ./modpacks:/modpacks:ro
     environment:
       EULA: "true"
-      TYPE: MODRINTH
-      VERSION: 1.20.1 # Needs to match minecraft version (ex: 1.7.10)
+      TYPE: ${TYPE}
+      VERSION: ${VERSION} # Needs to match minecraft version (ex: 1.7.10)
       OVERRIDE_SERVER_PROPERTIES: true
-      MEMORY: 4G # Memory assignment
-      MODRINTH_MODPACK: /modpacks/modpack.mrpack
+      MEMORY: ${MEMORY_ALLOC} # Memory assignment
+      MODRINTH_MODPACK: ${DOCKER_MODPACK_LOCATION}
+      CF_SERVER_MOD: ${DOCKER_MODPACK_LOCATION}
+      CF_BASE_DIR: /data
+      USE_MODPACK_START_SCRIPT: false
     ports:
-      - "25560:25565" # map internal port 25565 to external port 25565
+      - "${SERVER_PORT}:25565" # map internal port 25565 to external port 25565
