@@ -6,6 +6,8 @@ NAME="sample_name"
 VERSION="1.20.1"
 TYPE="MODRINTH"
 # TYPE="CURSEFORGE"
+JAVA_VERSION=8
+DEBUG=false
 MEMORY_ALLOC="8G"
 SERVER_PORT="25565"
 MODPACK_DOWNLOAD_LINK="https://cdn.modrinth.com/data/EGs3lC8D/versions/fqg3aUjP/Prominence%20II%20Hasturian%20Era%203.1.7.mrpack"
@@ -24,6 +26,8 @@ DOCKER_MODPACK_LOCATION="/${OUTPUT_FILE}"
 
 # Export variables for docker container
 export NAME
+export JAVA_VERSION
+export DEBUG
 export VERSION
 export TYPE
 export MEMORY_ALLOC

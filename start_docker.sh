@@ -13,7 +13,7 @@ fi
 
 # Add mix-ins from /modpack/mods/*.jar to modpack.zip if curseforge
 if [ "${TYPE}" = "CURSEFORGE" ]; then
-  (cd modpack; 7z a modpack.zip mods/*.jar) || (echo "Failed to add mix-ins!"; exit 1)
+  (cd modpacks && 7z a modpack.zip mods/*.jar) || (echo "Failed to add mix-ins!" && exit 1)
 fi
 
 # Launch docker
