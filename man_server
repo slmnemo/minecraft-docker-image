@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SERVER_NAME=o_creat
-INSTANCE_NAME=mfmk
+source definitions
+INSTANCE_NAME=mc-server
 
 case $1 in
 	"install")
@@ -15,21 +15,21 @@ case $1 in
 		;;
 
 	"restart")
-		docker exec -i $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 5 minutes!'"
+		docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 5 minutes!'"
 		sleep 5m
-		docker exec $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli stop
+		docker exec $NAME-$INSTANCE_NAME-1 rcon-cli stop
 		echo "Restarted server!"
 		;;
 
 	"stop")
-		docker exec -i $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server shutting down in 5 minutes!'"
+		docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server shutting down in 5 minutes!'"
 		sleep 5m
-		docker kill $SERVER_NAME-$INSTANCE_NAME-1
+		docker kill $NAME-$INSTANCE_NAME-1
 		echo "Stopped docker server"
 		;;
 	"exec")
-		docker exec -i $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli $2
-		echo "Executed command $1 in container $SERVER_NAME-$INSTANCE_NAME-1 successfully!"
+		docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli $2
+		echo "Executed command $1 in container $NAME-$INSTANCE_NAME-1 successfully!"
 		;;
 	*)
 		echo "Invalid parameter specified"
