@@ -4,33 +4,42 @@ source definitions
 INSTANCE_NAME=mc-server
 
 case $1 in
-	"install")
-		./get_modpack.sh
-		echo installed modpack files
-		;;
-	
 	"start")	
-		./docker_start.sh
+    ./start_docker.sh
 		echo started server successfully!
 		;;
 
 	"restart")
-		docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 5 minutes!'"
-		sleep 5m
+		echo "say 'Server restarting in 5 minutes!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 5 minutes!'"
+		sleep 4m
+		echo "say 'Server restarting in 1 minute!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 1 minutes!'"
+    sleep 30s
+		echo "say 'Server restarting in 30 seconds!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 30 seconds!'"
+    sleep 20s
+		echo "say 'Server restarting in 10 seconds!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 10 seconds!'"
+    sleep 10s
 		docker exec $NAME-$INSTANCE_NAME-1 rcon-cli stop
 		echo "Restarted server!"
 		;;
 
 	"stop")
-		docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server shutting down in 5 minutes!'"
-		sleep 5m
+		echo "say 'Server restarting in 5 minutes!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 5 minutes!'"
+		sleep 4m
+		echo "say 'Server restarting in 1 minute!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 1 minutes!'"
+    sleep 30s
+		echo "say 'Server restarting in 30 seconds!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 30 seconds!'"
+    sleep 20s
+		echo "say 'Server restarting in 10 seconds!'" && docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "say 'Server restarting in 10 seconds!'"
+    sleep 10s
 		docker kill $NAME-$INSTANCE_NAME-1
 		echo "Stopped docker server"
 		;;
+
 	"exec")
-		docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli $2
+		docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli "$2"
 		echo "Executed command $1 in container $NAME-$INSTANCE_NAME-1 successfully!"
 		;;
+
 	*)
 		echo "Invalid parameter specified"
 		;;
