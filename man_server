@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SERVER_NAME=default
-INSTANCE_NAME=default
+SERVER_NAME=o_creat
+INSTANCE_NAME=mfmk
 
 case $1 in
 	"install")
@@ -27,10 +27,10 @@ case $1 in
 		docker kill $SERVER_NAME-$INSTANCE_NAME-1
 		echo "Stopped docker server"
 		;;
-	# TODO: Add exec option
 	"exec")
 		docker exec -i $SERVER_NAME-$INSTANCE_NAME-1 rcon-cli $2
 		echo "Executed command $1 in container $SERVER_NAME-$INSTANCE_NAME-1 successfully!"
+		;;
 	*)
 		echo "Invalid parameter specified"
 		;;
