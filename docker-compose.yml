@@ -2,7 +2,7 @@ version: '3.8'
 name: ${NAME} # Name of docker higher level container/bridge
 services:
   mc-server: # Name of specific docker container
-    image: itzg/minecraft-server:java17
+    image: itzg/minecraft-server:java${JAVA_VERSION}
     restart: unless-stopped
     volumes:
     - ./data:/data
@@ -17,5 +17,6 @@ services:
       CF_SERVER_MOD: ${DOCKER_MODPACK_LOCATION}
       CF_BASE_DIR: /data
       USE_MODPACK_START_SCRIPT: false
+      DEBUG: ${DEBUG}
     ports:
       - "${SERVER_PORT}:25565" # map internal port 25565 to external port 25565
