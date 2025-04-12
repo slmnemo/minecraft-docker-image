@@ -20,7 +20,7 @@ export DOCKER_MODPACK_LOCATION
 # Download modpack using curl
 if [ ! -f "${OUTPUT_FILE}" ]; then
   echo Downloading "${MODPACK_DOWNLOAD_LINK}"
-  curl -L "${MODPACK_DOWNLOAD_LINK}" --output "${OUTPUT_FILE}" || echo "Failed to download modpack!" && exit 1
+  curl -L "${MODPACK_DOWNLOAD_LINK}" --output "${OUTPUT_FILE}" || rm "${OUTPUT_FILE}" && echo "Failed to download modpack!" && exit 1
 fi
 
 # Add mix-ins from /modpack/mods/*.jar to modpack.zip if curseforge
