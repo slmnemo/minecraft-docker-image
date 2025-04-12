@@ -40,6 +40,11 @@ case $1 in
 		echo "Executed command $1 in container $NAME-$INSTANCE_NAME-1 successfully!"
 		;;
 
+  "attach")
+    echo "Attaching to console for container ${NAME}-${INSTANCE_NAME}"
+    docker exec -i $NAME-$INSTANCE_NAME-1 rcon-cli
+    ;;
+
 	*)
 		echo "Invalid parameter specified"
 		;;
